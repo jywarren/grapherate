@@ -29,11 +29,19 @@ body {
   stroke-width: 1.5px;
 }
 
+p {
+  clear:both;
+}
+
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.js"></script>
 
 <h1>Public Lab: Shinyei PPD42 via Open Pipe Kit</h1>
+
+<div class="graph"></div>
+
+<p>By <a href="//publiclab.org">Public Lab</a> | <a href="https://github.com/jywarren/grapherate">Open Source</a> | <a href="//publiclab.org/tag/shinyei">Read more</a></p>
 
 <script>
 
@@ -65,7 +73,7 @@ var line2 = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.p2lowpercent); });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".graph").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
