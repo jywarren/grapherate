@@ -67,11 +67,7 @@ var yAxis = d3.svg.axis()
 
 var line1 = d3.svg.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.p1lowpercent); });
-
-var line2 = d3.svg.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.p2lowpercent); });
+    .y(function(d) { return y(d.concentrationugm); });
 
 var svg = d3.select(".graph").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -82,30 +78,23 @@ var svg = d3.select(".graph").append("svg")
 var draw = function() {
 
   //d3.csv("data.csv", function(error, data) {
-  d3.csv("https://data.sparkfun.com/output/mK5Llj6G2NUJ5Zd2y4ED.csv", function(error, data) {
+  //d3.csv("https://data.sparkfun.com/output/mK5Llj6G2NUJ5Zd2y4ED.csv", function(error, data) {
+  d3.csv("https://data.sparkfun.com/output/g6Gn19yp9yU6WaObjlYO.csv", function(error, data) {
     data.forEach(function(d) {
-      d.p1lowpercent = +d.p1lowpercent;
-      d.p2lowpercent = +d.p2lowpercent;
+      d.concentrationugm = +d.concentrationugm;
       d.date = parseDate(d.timestamp);
     });
  
     x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain(d3.extent(data, function(d) { return d.p1lowpercent; }));
+    y.domain(d3.extent(data, function(d) { return d.concentrationugm; }));
 
     svg.select('.line1').remove()
-    svg.select('.line2').remove()
 
     svg.append("path")
       .datum(data)
       .attr("class", "line1")
       .attr("d", line1);
-
-    svg.append("path")
-      .datum(data)
-      .attr("class", "line2")
-      .attr("d", line2);
- 
-  });
+  })
 }
 
 draw();
@@ -124,7 +113,7 @@ setInterval(draw,5000);
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Percent (%)");
+      .text("µg/m^3");
 
 
 </script>
