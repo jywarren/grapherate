@@ -67,11 +67,11 @@ var yAxis = d3.svg.axis()
 
 var line1 = d3.svg.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.p1lowpercent); });
+    .y(function(d) { return y(d[Object.keys(d)[0]]); });
 
 var line2 = d3.svg.line()
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.p2lowpercent); });
+    .y(function(d) { return y(d[Object.keys(d)[0]]); });
 
 var svg = d3.select(".graph").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -81,18 +81,24 @@ var svg = d3.select(".graph").append("svg")
 
 var draw = function() {
 
-  var key = (window.location+"").split('?')[1].split('key=')[1] || "mK5Llj6G2NUJ5Zd2y4ED";
+  var params = (window.location+"").split('?')[1]
+  if (params) var key = params.split('key=')[1];
+  else var key = "mK5Llj6G2NUJ5Zd2y4ED";
 
   //d3.csv("data.csv", function(error, data) {
   d3.csv("https://data.sparkfun.com/output/"+key+".csv", function(error, data) {
+
+    var keys = Object.keys(data[0]);
+
     data.forEach(function(d) {
-      d.p1lowpercent = +d.p1lowpercent;
-      d.p2lowpercent = +d.p2lowpercent;
+      keys.forEach(function(k) {
+        if (k != 'timestamp') d[k] = +d[k];
+      });
       d.date = parseDate(d.timestamp);
     });
  
     x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain(d3.extent(data, function(d) { return d.p1lowpercent; }));
+    y.domain(d3.extent(data, function(d) { return d[keys[0]]; }));
 
     svg.select('.line1').remove()
     svg.select('.line2').remove()
