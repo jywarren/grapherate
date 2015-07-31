@@ -37,7 +37,7 @@ p {
 <body>
 <script src="http://d3js.org/d3.v3.js"></script>
 
-<h1>Public Lab: Shinyei PPD42 via Open Pipe Kit</h1>
+<h1>Public Lab: <span class="title">Grapherate</span></h1>
 
 <div class="graph"></div>
 
@@ -81,8 +81,10 @@ var svg = d3.select(".graph").append("svg")
 
 var draw = function() {
 
+  var key = (window.location+"").split('?')[1].split('key=')[1] || "mK5Llj6G2NUJ5Zd2y4ED";
+
   //d3.csv("data.csv", function(error, data) {
-  d3.csv("https://data.sparkfun.com/output/mK5Llj6G2NUJ5Zd2y4ED.csv", function(error, data) {
+  d3.csv("https://data.sparkfun.com/output/"+key+".csv", function(error, data) {
     data.forEach(function(d) {
       d.p1lowpercent = +d.p1lowpercent;
       d.p2lowpercent = +d.p2lowpercent;
