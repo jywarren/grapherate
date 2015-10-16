@@ -1,6 +1,6 @@
 # Grapherate
 Quick graphing of Phant.js streams from data.sparkfun.com. 
-
+ 
 
 Try the very basic early release at https://jywarren.github.com/grapherate
 
