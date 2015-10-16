@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Grapherate</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="../bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="../grapherate.css" rel="stylesheet">
+
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+
+  <script src="../src/core/Class.js"></script>
+  <script src="../bower_components/d3/d3.min.js"></script>
+  <script src="../grapherate.js"></script>
+
+</head>
+<body id="graph">
+
+  <h1>Grapherate: <span class="title"></span></h1>
+
+  <div class="graph"></div>
+
+  <div class="tools container">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+      <p>Updating every <span class="delay"></span> seconds.</p>
+      <div class="input-group">
+
+        <div class="input-group-addon"><i class="fa fa-code"></i> Embed:</div>
+        <input class="form-control permalink" type="text" width="40" />
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    By <a href="//publiclab.org">Public Lab</a> | 
+    <a href="https://github.com/jywarren/grapherate">Open Source</a> | 
+    <a href="//publiclab.org/tag/shinyei">Sensors</a>
+  </footer>
+
+  <script>
+
+    var graph = new Grapherate(getUrlParameter('key'), {
+      onLoad: function(data) {
+        console.log(data.title);
+        $('.title').html(data.title);
+      }
+    });
+
+    $('.permalink').val("<iframe src='" + window.location + "' width='500px' height='300px;' border='0' />");
+    $('.permalink').click(function(e){ $('.permalink').select(); });
+
+    $('.delay').html(graph.delay / 1000);
+
+  </script>
+
+</body>
+</html>

@@ -1,4 +1,21 @@
-Pxlqst = {};
+//Grapherate = {};
+
+
+function getUrlParameter(sParam) {
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++) 
+  {
+    var sParameterName = sURLVariables[i].split('=');
+    if (sParameterName[0] == sParam) 
+    {
+      // scrub out trailing slashes which are sometimes inserted
+      if (sParameterName[1][sParameterName[1].length - 1] == "/") sParameterName[1] = sParameterName[1].substr(0, sParameterName[1].length - 1); 
+      return sParameterName[1];
+    }
+  }
+}
+
 
 /* From http://ejohn.org/blog/simple-javascript-inheritance/ */
 

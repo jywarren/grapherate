@@ -2,6 +2,20 @@ body {
   font: 10px sans-serif;
 }
 
+h1 {
+  text-align: center;
+  padding: 50px 0;
+}
+
+/* graph page: */
+#graph h1 {
+  padding: 20px 0;
+}
+
+.graph {
+  margin: 0 auto;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -27,6 +41,16 @@ body {
   stroke: red;
 }
 
-p {
+.container {
+  text-align: center;
+}
+
+form {
+  margin-top: 100px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
   clear:both;
 }

@@ -1,21 +1,59 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<link href="grapherate.css" rel="stylesheet">
+<html>
+<head>
+
+  <title>Grapherate</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="bower_components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href="grapherate.css" rel="stylesheet">
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+
+  <script src="src/core/Class.js"></script>
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="grapherate.js"></script>
+
+</head>
 <body>
-<script src="src/core/Class.js"></script>
-<script src="http://d3js.org/d3.v3.js"></script>
-<script src="grapherate.js"></script>
 
-<h1>Public Lab: <span class="title">Grapherate</span></h1>
+  <h1>Public Lab: <span class="title">Grapherate</span></h1>
 
-<div class="graph"></div>
+  <div class="container">
 
-<p>By <a href="//publiclab.org">Public Lab</a> | <a href="https://github.com/jywarren/grapherate">Open Source</a> | <a href="//publiclab.org/tag/shinyei">Read more</a></p>
+    <div class="col-md-2">
+    </div>
 
-<script>
+    <div class="col-md-8">
 
-  var graph = new Grapherate();
+      <p>Enter a public key from <a href="https://data.sparkfun.com">Sparkfun's Phant service</a> to generate a live graph of it.</p>
 
-</script>
+      <form method="GET" action="g" class="form">
+  
+        <input class="input input-inline input-lg key" placeholder="bx8k2n35t89" type="text" name="key" />
+        <input class="btn btn-lg btn-primary" type="submit" />
+  
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    By <a href="//publiclab.org">Public Lab</a> | 
+    <a href="https://github.com/jywarren/grapherate">Open Source</a> | 
+    <a href="//publiclab.org/tag/shinyei">Sensors</a>
+  </footer>
+
+  <script>
+
+    //
+
+  </script>
+
 </body>
 </html>
