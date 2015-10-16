@@ -15,6 +15,34 @@ To use it **right now** with a Phant public key, add your key to the end of this
 
     https://jywarren.github.com/grapherate?key=YOUR_KEY_HERE
 
+**********************************
+
+##Constructor
+
+Construct a graph by passing a DOM element and options object:
+
+````js
+var graph = new Grapherate(
+  'asdfadsjklgja', // your Phant/data.sparkfun.com public key
+  {
+   selector: '#graph', // d3/jQuery style DOM selector, default '.graph'
+});
+````
+
+##Options
+
+Options include:
+
+* `width`    - default width of graph including margins (not overall page)
+* `height`   - default height of graph including margins (not overall page)
+* `selector` - default element to insert graph into
+* `format`   - default to CSV
+* `delay`    - delay between updates, in milliseconds
+* `xKey`     - field to use for the x-axis -- 'timestamp' is default Phant
+* `yScale`   - which key to use as the y scale? Or get rid of this.
+* `live`     - whether to keep refreshing every <graph.delay> milliseconds
+* `onLoad`   - function to call after we've fetched Phant stream details; accepts an object with those deets
+
 
 **********************************
 
@@ -45,25 +73,9 @@ Documentation page
 * specifying CSV/JSON formats: 
   * for riffle, for example -- e.g. a column title = "temperature (C)" -- units in parentheses as a standard column convention
 
+* add 'Include Grapherate with `bower install grapherate --save`'
+* add 'display' param: ['battery', 'temperature']
 
-
-**********************************
-
-##API constructor:
-
-Include Grapherate with `bower install grapherate --save`
-
-Construct a graph by passing a DOM element and options object:
-
-`
-new Grapherate(
-  $('#graph')[0], // a DOM element
-  {
-   key: 'asdfadsjklgja', 
-   xAxis: 'riffleTimestamp', // default 'timestamp'
-   display: ['battery', 'temperature']
-});
-`
 
 
 **********************************
