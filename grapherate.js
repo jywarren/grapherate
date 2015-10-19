@@ -10,6 +10,7 @@ Grapherate = Class.extend({
 
     graph.width    = args['width']    || 900;         // default width of graph including margins (not overall page)
     graph.height   = args['height']   || 400;         // default height of graph including margins (not overall page)
+    graph.url      = args['url']      || false;       // skip Phant (data.sparkfun.com) and directly grab an online CSV
     graph.selector = args['selector'] || '.graph';    // default element to insert graph into
     graph.format   = args['format']   || 'csv';       // default to CSV
     graph.delay    = args['delay']    || 10000;       // delay between updates, in milliseconds
@@ -26,14 +27,16 @@ Grapherate = Class.extend({
     // columns will each be represented as a line:
     graph.lines = [];
 
+    // connect with Phant, as default:
+    if (!graph.url) graph.url = "https://data.sparkfun.com/output/" + graph.key + ".csv";
 
     // run every <graph.delay> milliseconds:
     // Currently, we do more in here than you might think, because we'll re-assess 
     // the options parameter each time. Or, we could make a new Grapherate object each time
     // the user wants different settings. Yeah... anyways. 
     graph.draw = function() {
-    
-      d3.csv("https://data.sparkfun.com/output/" + graph.key + ".csv", function(error, data) {
+
+      d3.csv(graph.url, function(error, data) {
    
         // each column header 
         graph.keys = Object.keys(data[0]);
