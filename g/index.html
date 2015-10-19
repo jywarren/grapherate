@@ -31,13 +31,26 @@
     </div>
 
     <div class="col-md-4">
-      <p>Updating from <a class="stream-link" href="https://data.sparkfun.com/streams/">data.sparkfun.com</a> every <span class="delay"></span> seconds.</p>
-      <div class="input-group">
 
+      <p>
+        Updating from 
+        <a class="stream-link" href="https://data.sparkfun.com/streams/">data.sparkfun.com</a> 
+        every <span class="delay"></span> seconds.
+      </p>
+
+      <div class="formats download-buttons btn-group btn-group-xs">
+        <a class="btn btn-xs btn-default btn-json" href=".json">JSON</a>
+        <a class="btn btn-xs btn-default btn-csv" href=".csv">CSV</a>
+        <a class="btn btn-xs btn-default btn-sql" href=".sql">MySQL</a>
+        <a class="btn btn-xs btn-default btn-psql" href=".psql">PostgreSQL</a>
+        <a class="btn btn-xs btn-default btn-atom" href=".atom">Atom</a>
+      </div>
+
+      <div style="margin-top:6px;" class="input-group">
         <div class="input-group-addon"><i class="fa fa-code"></i> Embed:</div>
         <input class="form-control permalink" type="text" width="40" />
-
       </div>
+
     </div>
   </div>
 
@@ -51,7 +64,14 @@
 
   window.addEventListener('load', function(e) {
 
-    $('.stream-link').attr('href', 'https://data.sparkfun.com/streams/' + getUrlParameter('key'));
+    var key = getUrlParameter('key');
+
+    $('.stream-link').attr('href', 'https://data.sparkfun.com/streams/' + key);
+    $('.formats .btn-json').attr('href', 'https://data.sparkfun.com/output/' + key + '.json');
+    $('.formats .btn-csv').attr('href', 'https://data.sparkfun.com/output/' + key + '.csv');
+    $('.formats .btn-sql').attr('href', 'https://data.sparkfun.com/output/' + key + '.sql');
+    $('.formats .btn-psql').attr('href', 'https://data.sparkfun.com/output/' + key + '.psql');
+    $('.formats .btn-atom').attr('href', 'https://data.sparkfun.com/output/' + key + '.atom');
 
     var graph = new Grapherate(getUrlParameter('key'), {
       onLoad: function(data) {
