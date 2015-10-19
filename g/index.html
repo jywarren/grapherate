@@ -64,20 +64,25 @@
 
   window.addEventListener('load', function(e) {
 
-    var key = getUrlParameter('key');
+    if (!getUrlParameter('url')) {
 
-    $('.stream-link').attr('href', 'https://data.sparkfun.com/streams/' + key);
-    $('.formats .btn-json').attr('href', 'https://data.sparkfun.com/output/' + key + '.json');
-    $('.formats .btn-csv').attr('href', 'https://data.sparkfun.com/output/' + key + '.csv');
-    $('.formats .btn-sql').attr('href', 'https://data.sparkfun.com/output/' + key + '.sql');
-    $('.formats .btn-psql').attr('href', 'https://data.sparkfun.com/output/' + key + '.psql');
-    $('.formats .btn-atom').attr('href', 'https://data.sparkfun.com/output/' + key + '.atom');
+      var key = getUrlParameter('key');
+ 
+      $('.stream-link').attr('href', 'https://data.sparkfun.com/streams/' + key);
+      $('.formats .btn-json').attr('href', 'https://data.sparkfun.com/output/' + key + '.json');
+      $('.formats .btn-csv').attr('href', 'https://data.sparkfun.com/output/' + key + '.csv');
+      $('.formats .btn-sql').attr('href', 'https://data.sparkfun.com/output/' + key + '.sql');
+      $('.formats .btn-psql').attr('href', 'https://data.sparkfun.com/output/' + key + '.psql');
+      $('.formats .btn-atom').attr('href', 'https://data.sparkfun.com/output/' + key + '.atom');
+
+    }
 
     var graph = new Grapherate(getUrlParameter('key'), {
       onLoad: function(data) {
         console.log(data.title);
         $('.title').html(data.title);
-      }
+      },
+      url: getUrlParameter('url') // returns false if it doesn't exist
     });
 
     $('.permalink').val("<iframe src='" + window.location + "' width='900px' height='650px;' style='border:none;' />");
