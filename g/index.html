@@ -31,7 +31,7 @@
     </div>
 
     <div class="col-md-4">
-      <p>Updating every <span class="delay"></span> seconds.</p>
+      <p>Updating from <a class="stream-link" href="https://data.sparkfun.com/streams/">data.sparkfun.com</a> every <span class="delay"></span> seconds.</p>
       <div class="input-group">
 
         <div class="input-group-addon"><i class="fa fa-code"></i> Embed:</div>
@@ -49,6 +49,10 @@
 
   <script>
 
+  window.addEventListener('load', function(e) {
+
+    $('.stream-link').attr('href', 'https://data.sparkfun.com/streams/' + getUrlParameter('key'));
+
     var graph = new Grapherate(getUrlParameter('key'), {
       onLoad: function(data) {
         console.log(data.title);
@@ -60,6 +64,8 @@
     $('.permalink').click(function(e){ $('.permalink').select(); });
 
     $('.delay').html(graph.delay / 1000);
+
+  });
 
   </script>
 
