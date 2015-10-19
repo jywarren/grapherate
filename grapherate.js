@@ -139,25 +139,32 @@ Grapherate = Class.extend({
     // get additional details from Phant API:
     graph.fetchDetails = function() {
 
-      d3.json("https://data.sparkfun.com/streams/" + graph.key + ".json", function(error, data) {
+      // d3 doesn't support jsonp, but jquery does
+      $.ajax("https://data.sparkfun.com/streams/" + graph.key + ".json", {
 
-        if (data && data.stream && data.stream._doc) {
+        dataType: 'jsonp',
+        contentType: "application/json",
+        success: function(data) {
 
-          var stream = data.stream._doc;
- 
-          graph.title = stream.title;
-          graph.location = stream.location;
-          graph.description = stream.description;
- 
-          if (graph.onLoad) graph.onLoad(stream);
+          if (data && data.stream && data.stream._doc) {
+         
+            var stream = data.stream._doc;
+         
+            graph.title = stream.title;
+            graph.location = stream.location;
+            graph.description = stream.description;
+         
+            if (graph.onLoad) graph.onLoad(stream);
+         
+          }
 
         }
-
       });
 
     }
-    
-    graph.fetchDetails();
+  
+// wait for jsonp fixes to Phant: https://github.com/sparkfun/phant/issues/145  
+//    graph.fetchDetails();
 
     graph.setup();
 
