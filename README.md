@@ -1,4 +1,5 @@
 # Grapherate
+
 Quick graphing of Phant.js streams from data.sparkfun.com. 
  
 
