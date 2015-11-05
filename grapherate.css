@@ -29,16 +29,16 @@ h1 {
 
 .line {
   fill: none;
-  stroke: red;
+  /* stroke: red; */
   stroke-width: 1.5px;
 }
 
 .line1 {
-  stroke: steelblue;
+  /* stroke: steelblue; */
 }
 
 .line2 {
-  stroke: red;
+  /* stroke: red; */
 }
 
 .container {

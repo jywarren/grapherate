@@ -37,9 +37,11 @@ Grapherate = Class.extend({
     graph.draw = function() {
 
       d3.csv(graph.url, function(error, data) {
-   
+
         // each column header 
         graph.keys = Object.keys(data[0]);
+
+        graph.color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 
         // scan for our "timestamp" field:    
         data.forEach(function(d) {
@@ -48,6 +50,9 @@ Grapherate = Class.extend({
           d.date = graph.parseDate(d.timestamp);
 
         });
+
+        // clear lines
+        graph.lines = [];
 
         // for each key:
         graph.keys.forEach(function(key, i) {
@@ -71,7 +76,11 @@ Grapherate = Class.extend({
         // set up the extent of the graph display, 
         // using what we've learned about the provided keys:
         graph.x.domain(d3.extent(data, function(d) { return d.date; }));
-        graph.y.domain(d3.extent(data, function(d) { return d[graph.keys[graph.yScale]]; })); // restructure this to use a string
+
+        // I don't think this is working; it's supposed to scale to the given data:
+        //graph.y.domain(d3.extent(data, function(d) { return d[graph.keys[graph.yScale]]; })); // restructure this to use a string
+        graph.y.domain([-100,1500]); // restructure this to use a string
+        //graph.y.domain([d3.min(data, function(d) { return d.low; }), d3.max(data, function(d) { return d.high; })]);
 
         // for each line:
         graph.lines.forEach(function(line, i) {
@@ -82,7 +91,8 @@ Grapherate = Class.extend({
           // add new version of this line:
           graph.svg.append("path")
                    .datum(data)
-                   .attr("class", "line line" + i) // switch this to a direct attribute color, so it'll print that way in a download
+                   .attr("class", "line line" + i)
+                   .style("stroke", function(d) { return graph.color(d.name); })
                    .attr("d", line);
 
         });
@@ -104,8 +114,11 @@ Grapherate = Class.extend({
                        .range([0, graph.d3width]);
       
       graph.y = d3.scale.linear()
+      //graph.y = d3.scale.ordinal()
                         .range([graph.d3height, 0]);
-      
+     
+      graph.color = d3.scale.category10();
+ 
       graph.xAxis = d3.svg.axis()
                           .scale(graph.x)
                           .orient("bottom");

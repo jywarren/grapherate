@@ -62,6 +62,8 @@
 
   <script>
 
+  var graph;
+
   window.addEventListener('load', function(e) {
 
     if (!getUrlParameter('url')) {
@@ -77,7 +79,7 @@
 
     }
 
-    var graph = new Grapherate(getUrlParameter('key'), {
+    graph = new Grapherate(getUrlParameter('key'), {
       onLoad: function(data) {
         console.log(data.title);
         $('.title').html(data.title);
